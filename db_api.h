@@ -1,0 +1,68 @@
+#ifndef __DB_API_H__
+#define __DB_API_H__
+
+/********************************************************
+ * file name: db_api.h
+ * writer: gzl
+ * date time:2013-05-28 17:29
+ * description: database abstruction layer api.
+ * *****************************************************/
+
+#include "config.h"
+#include "lock.h"
+
+#if defined(__cplusplus)
+extern "C"
+{
+#endif
+
+//database type define.
+typedef enum C_DATABASE_TYPE_T
+{
+	DB_TYPE_SQLITE
+}C_DATABASE_TYPE;
+
+//database type define.
+typedef struct CDatabase_t
+{
+	void *pDbHandle;	
+	
+	CMutex Locker;
+}CDatabase;
+
+typedef struct CDbParam_t
+{
+	int8_t pUserName[32];
+	int8_t pUserPassword[64];
+	
+	int8_t pServerIP[32];
+	int16u_t iServerPort;
+	
+	C_DATABASE_TYPE eDbType;
+}CDbParam;
+
+//open database.
+CDatabase *db_open( const CDbParam *pDbParam );
+
+//close database.
+void db_close( CDatabase *pDatabase );
+
+//exec sql.
+int32_t db_exec_sql( const CDatabase *pDatabase, const int8_t *pSql );
+
+//exec query.
+int32_t db_exec_query( const CDatabase *pDatabase, const int8_t *pSql );
+
+//db next row.
+int32_t db_next_row( const CDatabase *pDatabase );
+
+//db get column data.
+int32_t db_get_column_int( const CDatabase *pDatabase, int32_t iFieldIndex );
+
+int32_t db_get_column_string( const CDatabase *pDatabase, int32_t iFieldIndex );
+
+#if defined(__cplusplus)
+}
+#endif
+
+#endif/* __DB_API_H__ */
