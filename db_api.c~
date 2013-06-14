@@ -283,6 +283,8 @@ int32_t db_get_column_string( const CDatabase *pDatabase, int32_t iFieldIndex, i
 					{
 						int32_t iDataLen = strlen(pData);
 						
+						log_print( pData );
+						
 						if ( iDataLen < iDataBufLen )
 						{
 							memcpy( pDataBuf, pData, iDataLen + 1 );

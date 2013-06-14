@@ -67,7 +67,7 @@ int32_t db_next_row( const CDatabase *pDatabase );
 //db get column data.
 int32_t db_get_column_int( const CDatabase *pDatabase, int32_t iFieldIndex );
 
-int32_t db_get_column_string( const CDatabase *pDatabase, int32_t iFieldIndex, int8_t *pDataBuf, const int32_t iDataBufLen );
+int32_t db_get_column_string( const CDatabase *pDatabase, int32_t iFieldIndex );
 
 #if defined(__cplusplus)
 }
